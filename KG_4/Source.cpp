@@ -679,7 +679,7 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
     loadTextures();
     initLighting(); //Инициализируем освещение
-
+    
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
