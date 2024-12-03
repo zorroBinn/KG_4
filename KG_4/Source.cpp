@@ -144,50 +144,6 @@ void drawPicture() {
     glDisable(GL_TEXTURE_2D);
 }
 
-//Окно
-void drawWindow() {
-    float width = 2.5f, height = 2.0f; //Размеры окна
-
-    glBindTexture(GL_TEXTURE_2D, windowTexture);
-    glEnable(GL_TEXTURE_2D);
-
-    glPushMatrix();
-    glTranslatef(9.99f, 2.0f, 0.0f); //Позиция окна на правой стене
-    glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); //Разворачиваем окно вдоль стены
-    glBegin(GL_QUADS);
-    glNormal3f(1.0f, 0.0f, 0.0f);
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-width / 2, height / 2, 0.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(width / 2, height / 2, 0.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(width / 2, -height / 2, 0.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-width / 2, -height / 2, 0.0f);
-    glEnd();
-
-    glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
-}
-
-//Часы
-void drawClock() {
-    float width = 1.0f, height = 1.0f; //Размеры часов
-
-    glBindTexture(GL_TEXTURE_2D, clockTexture);
-    glEnable(GL_TEXTURE_2D);
-
-    glPushMatrix();
-    glTranslatef(-9.99f, 3.0f, 0.0f); //Позиция часов на левой стене
-    glRotatef(90.0f, 0.0f, 1.0f, 0.0f); //Разворачиваем часы вдоль стены
-    glBegin(GL_QUADS);
-    glNormal3f(-1.0f, 0.0f, 0.0f);
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-width / 2, height / 2, 0.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(width / 2, height / 2, 0.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(width / 2, -height / 2, 0.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-width / 2, -height / 2, 0.0f);
-    glEnd();
-
-    glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
-}
-
 //Параллелепипед с текстурой
 void drawTexturedParallelepiped(float width, float height, float depth, GLuint texture) {
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -199,17 +155,17 @@ void drawTexturedParallelepiped(float width, float height, float depth, GLuint t
     glBegin(GL_QUADS);
     //Передняя сторона
     glNormal3f(0.0f, 0.0f, 1.0f);
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.5f, -0.5f, 0.5f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(0.5f, -0.5f, 0.5f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(0.5f, 0.5f, 0.5f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.5f, 0.5f, 0.5f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-0.5f, -0.5f, 0.5f);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(0.5f, -0.5f, 0.5f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(0.5f, 0.5f, 0.5f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(-0.5f, 0.5f, 0.5f);
 
     //Задняя сторона
     glNormal3f(0.0f, 0.0f, -1.0f);
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(0.5f, -0.5f, -0.5f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(-0.5f, -0.5f, -0.5f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(-0.5f, 0.5f, -0.5f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(0.5f, 0.5f, -0.5f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(0.5f, -0.5f, -0.5f);
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.5f, -0.5f, -0.5f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.5f, 0.5f, -0.5f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(0.5f, 0.5f, -0.5f);
 
     //Верхняя сторона
     glNormal3f(0.0f, 1.0f, 0.0f);
@@ -246,6 +202,31 @@ void drawTexturedParallelepiped(float width, float height, float depth, GLuint t
     glDisable(GL_TEXTURE_2D);
 }
 
+//Окно
+void drawWindow() {
+    float width = 2.5f, height = 2.0f, depth = 0.03f; //Размеры окна
+
+    glPushMatrix();
+    glTranslatef(9.99f, 2.0f, 0.0f); //Позиция окна на правой стене
+    glRotatef(-90.0f, 0.0f, 1.0f, 0.0f); //Разворачиваем окно вдоль стены
+    glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
+    drawTexturedParallelepiped(width, height, depth, windowTexture);
+
+    glPopMatrix();
+}
+
+//Часы
+void drawClock() {
+    float width = 1.0f, height = 1.0f, depth = 0.03f; //Размеры часов
+
+    glPushMatrix();
+    glTranslatef(-9.99f, 3.0f, 0.0f); //Позиция часов на левой стене
+    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+    glRotatef(180.0f, 1.0f, 0.0f, 0.0f);
+    drawTexturedParallelepiped(width, height, depth, clockTexture);
+    glPopMatrix();
+}
+
 //Стол
 void drawTable() {
     float legHeight = 1.0f, legWidth = 0.1f;
@@ -276,7 +257,6 @@ void drawChair() {
 
     //Сиденье
     glPushMatrix();
-    //glNormal3f(0.0f, 1.0f, 0.0f);
     glTranslatef(0.0f, legHeight + seatHeight / 2, 0.0f);
     drawTexturedParallelepiped(seatWidth, seatHeight, seatDepth, chairTexture);
     glPopMatrix();
@@ -301,13 +281,12 @@ void drawChair() {
 
 //Дверь
 void drawDoor() {
-    float doorWidth = 1.5f, doorHeight = 3.0f, doorThickness = 0.05f;
+    float width = 1.5f, height = 3.0f, depth = 0.05f;
 
-    //Дверь
     glPushMatrix();
-    glTranslatef(0.0f, doorHeight / 2 - 0.05, 9.97f); //Положение двери за первоначальной позицией камеры
+    glTranslatef(0.0f, height / 2 - 0.05, 9.97f); //Положение двери за первоначальной позицией камеры
     glRotatef(180, 0.0f, 1.0f, 0.0f);
-    drawTexturedParallelepiped(doorWidth, doorHeight, doorThickness, doorTexture);
+    drawTexturedParallelepiped(width, height, depth, doorTexture);
     glPopMatrix();
 }
 
@@ -347,7 +326,7 @@ void drawLaptop() {
     //Экран
     glPushMatrix();
     glTranslatef(0.0f, lidHeight / 2, lidDepth / 2); //Смещение для передней стороны (экран)
-    drawTexturedParallelepiped(-lidWidth, lidHeight, lidDepth, noutScreen); //Отрисовка экрана с текстурой
+    drawTexturedParallelepiped(lidWidth, lidHeight, lidDepth, noutScreen); //Отрисовка экрана с текстурой
     glPopMatrix();
 
     //Задняя сторона
@@ -355,10 +334,8 @@ void drawLaptop() {
     glTranslatef(0.0f, lidHeight / 2, -lidDepth / 2); //Смещение для задней стороны
     drawTexturedParallelepiped(lidWidth + 0.001, lidHeight + 0.001, lidDepth + 0.007, noutBack); //Отрисовка задней стороны с текстурой
     glPopMatrix();
-
     glPopMatrix();
     glPopMatrix();
-
     glPopMatrix();
 }
 
@@ -430,31 +407,33 @@ void drawShkaf(float x, float y, float z, float width, float height, float depth
     glPopMatrix();
 }
 
-//Источник света - посреди комнаты
+//Источники света - посреди потолка комнаты + экран ноутбука
 void initLighting() {
     glEnable(GL_LIGHTING); //Включение освещения
-    glEnable(GL_LIGHT0);   //Источник света 0
-
-    //Позиция источника света (центр потолка)
-    GLfloat light0Position[] = { 0.0f, 3.9f, 0.0f, 1.0f }; //Точечный свет
-    glLightfv(GL_LIGHT0, GL_POSITION, light0Position);
-
+    
+    glEnable(GL_LIGHT0); //Источник света 0
     //Цвет освещения
-    GLfloat light0Diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };   //Мягкий белый свет
-    GLfloat light0Specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };  //Блики
-    GLfloat light0Ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };   //Лёгкий фоновый свет
+    GLfloat light0Diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f }; //Мягкий белый свет
+    GLfloat light0Specular[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //Блики
+    GLfloat light0Ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f }; //Лёгкий фоновый свет
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light0Diffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light0Specular);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light0Ambient);
+    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05f); //Затухание света с расстоянием
 
-    //Управление затуханием света
-    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.1f); //Затухание света с расстоянием
-    glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05f);
+    //Источник света 1 (экран ноутбука)
+    glEnable(GL_LIGHT1);
+    GLfloat light1Diffuse[] = { 0.4f, 0.6f, 1.0f, 1.0f }; //Холодный свет
+    GLfloat light1Specular[] = { 0.5f, 0.7f, 1.0f, 1.0f }; //Блики
+    GLfloat light1Ambient[] = { 0.1f, 0.2f, 0.3f, 1.0f }; //Фоновый свет
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diffuse);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light1Specular);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
+    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.01f); //Затухание света с расстоянием
 
     //Настройка материалов сцены
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-
     GLfloat matSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //Блики от источника света
     glMaterialfv(GL_FRONT, GL_SPECULAR, matSpecular);
     glMateriali(GL_FRONT, GL_SHININESS, 64); //Гладкость поверхности
@@ -471,15 +450,41 @@ void display() {
 
     gluLookAt(cameraX, cameraY, cameraZ, lookX, lookY, lookZ, 0.0f, 1.0f, 0.0f);
     
-    //Светящийся кубик - для визуализации точки освещения
     glPushMatrix();
-    GLfloat emissionColor[] = { 1.0f, 1.0f, 0.8f, 1.0f }; //Cсвечение
-    glMaterialfv(GL_FRONT, GL_EMISSION, emissionColor);   //Включаем эмиссию
-    glTranslatef(0.0f, 3.9f, 0.0f);                       //Позиция источника света
-    glutSolidCube(0.1f);                                  //Кубик размером 0.3
-    GLfloat noEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    glMaterialfv(GL_FRONT, GL_EMISSION, noEmission);      //Отключаем эмиссию
+    //Позиция источника света (центр потолка)
+    GLfloat light0Position[] = { 0.0f, 3.9f, 0.0f, 1.0f }; //Точечный свет
+    glLightfv(GL_LIGHT0, GL_POSITION, light0Position);
     glPopMatrix();
+
+    //Светящийся кубик - для визуализации точки освещения на потолке
+    glPushMatrix();
+    GLfloat emissionColor[] = { 1.0f, 1.0f, 0.8f, 1.0f }; //Cвечение
+    glMaterialfv(GL_FRONT, GL_EMISSION, emissionColor); //Включаем эмиссию
+    glTranslatef(0.0f, 3.9f, 0.0f); //Позиция источника света
+    glutSolidCube(0.1f); //Кубик размером 0.3
+    GLfloat noEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_EMISSION, noEmission); //Отключаем эмиссию
+    glPopMatrix();
+
+    //Устанавливаем позицию света на экране ноутбука
+    glPushMatrix();
+    glTranslatef(0.0f, 1.3f, 0.0f); //Положение экрана ноутбука
+    GLfloat light1Position[] = { 0.0f, 0.39f, -0.68f, 1.0f };
+    glLightfv(GL_LIGHT1, GL_POSITION, light1Position);
+    GLfloat light1Direction[] = { 0.0f, 1.0f, -1.0f }; //Направление: вверх и назад (для камеры вперёд)
+    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1Direction);
+    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 90.0f); //Угол освещения
+    glPopMatrix();
+
+    ////Светящийся кубик - для визуализации точки освещения на экране
+    //glPushMatrix();
+    //GLfloat emission1Color[] = { 0.4f, 0.6f, 1.0f, 1.0f }; //Cвечение
+    //glMaterialfv(GL_FRONT, GL_EMISSION, emission1Color); //Включаем эмиссию
+    //glTranslatef(0.0f, 1.3f, 0.2f); //Позиция источника света
+    //glutSolidCube(0.1f); //Кубик размером 0.3
+    //GLfloat noEmission1[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    //glMaterialfv(GL_FRONT, GL_EMISSION, noEmission1); //Отключаем эмиссию
+    //glPopMatrix();
 
     //Материал для пола
     float floorAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
