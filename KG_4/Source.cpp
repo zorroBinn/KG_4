@@ -422,7 +422,7 @@ void initLighting() {
     glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05f); //Затухание света с расстоянием
 
     //Источник света 1 (экран ноутбука)
-    glEnable(GL_LIGHT1);
+    //glEnable(GL_LIGHT1);
     GLfloat light1Diffuse[] = { 0.4f, 0.6f, 1.0f, 1.0f }; //Холодный свет
     GLfloat light1Specular[] = { 0.5f, 0.7f, 1.0f, 1.0f }; //Блики
     GLfloat light1Ambient[] = { 0.1f, 0.2f, 0.3f, 1.0f }; //Фоновый свет
@@ -469,7 +469,7 @@ void display() {
     //Устанавливаем позицию света на экране ноутбука
     glPushMatrix();
     glTranslatef(0.0f, 1.3f, 0.0f); //Положение экрана ноутбука
-    GLfloat light1Position[] = { 0.0f, 0.39f, -0.68f, 1.0f };
+    GLfloat light1Position[] = { 0.0f, 0.39f, -0.5f, 1.0f };
     glLightfv(GL_LIGHT1, GL_POSITION, light1Position);
     GLfloat light1Direction[] = { 0.0f, 1.0f, -1.0f }; //Направление: вверх и назад (для камеры вперёд)
     glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1Direction);
