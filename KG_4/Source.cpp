@@ -407,7 +407,7 @@ void drawShkaf(float x, float y, float z, float width, float height, float depth
     glPopMatrix();
 }
 
-//Источники света - посреди потолка комнаты + экран ноутбука
+//Источники света - посреди потолка комнаты
 void initLighting() {
     glEnable(GL_LIGHTING); //Включение освещения
     
@@ -420,16 +420,6 @@ void initLighting() {
     glLightfv(GL_LIGHT0, GL_SPECULAR, light0Specular);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light0Ambient);
     glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05f); //Затухание света с расстоянием
-
-    //Источник света 1 (экран ноутбука)
-    //glEnable(GL_LIGHT1);
-    GLfloat light1Diffuse[] = { 0.4f, 0.6f, 1.0f, 1.0f }; //Холодный свет
-    GLfloat light1Specular[] = { 0.5f, 0.7f, 1.0f, 1.0f }; //Блики
-    GLfloat light1Ambient[] = { 0.1f, 0.2f, 0.3f, 1.0f }; //Фоновый свет
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diffuse);
-    glLightfv(GL_LIGHT1, GL_SPECULAR, light1Specular);
-    glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
-    glLightf(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.01f); //Затухание света с расстоянием
 
     //Настройка материалов сцены
     glEnable(GL_COLOR_MATERIAL);
@@ -465,26 +455,6 @@ void display() {
     GLfloat noEmission[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     glMaterialfv(GL_FRONT, GL_EMISSION, noEmission); //Отключаем эмиссию
     glPopMatrix();
-
-    //Устанавливаем позицию света на экране ноутбука
-    glPushMatrix();
-    glTranslatef(0.0f, 1.3f, 0.0f); //Положение экрана ноутбука
-    GLfloat light1Position[] = { 0.0f, 0.39f, -0.5f, 1.0f };
-    glLightfv(GL_LIGHT1, GL_POSITION, light1Position);
-    GLfloat light1Direction[] = { 0.0f, 1.0f, -1.0f }; //Направление: вверх и назад (для камеры вперёд)
-    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light1Direction);
-    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 90.0f); //Угол освещения
-    glPopMatrix();
-
-    ////Светящийся кубик - для визуализации точки освещения на экране
-    //glPushMatrix();
-    //GLfloat emission1Color[] = { 0.4f, 0.6f, 1.0f, 1.0f }; //Cвечение
-    //glMaterialfv(GL_FRONT, GL_EMISSION, emission1Color); //Включаем эмиссию
-    //glTranslatef(0.0f, 1.3f, 0.2f); //Позиция источника света
-    //glutSolidCube(0.1f); //Кубик размером 0.3
-    //GLfloat noEmission1[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    //glMaterialfv(GL_FRONT, GL_EMISSION, noEmission1); //Отключаем эмиссию
-    //glPopMatrix();
 
     //Материал для пола
     float floorAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
@@ -573,8 +543,8 @@ void display() {
     drawShkaf(8.9f, 0.0f, -9.4f, 2.0f, 3.0f, 1.0f, 0.0f);
 
     //Материал для ноутбука
-    float laptopAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    float laptopDiffuse[] = { 0.01f, 0.01f, 0.01f, 1.0f };
+    float laptopAmbient[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+    float laptopDiffuse[] = { 0.1f, 0.1f, 0.1f, 1.0f };
     float laptopSpecular[] = { 0.5f, 0.5f, 0.5f, 1.0f };
     setMaterial(laptopAmbient, laptopDiffuse, laptopSpecular, 30.0f);
     glPushMatrix();
